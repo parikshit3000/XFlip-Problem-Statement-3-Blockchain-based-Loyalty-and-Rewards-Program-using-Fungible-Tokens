@@ -16,6 +16,10 @@
  - Material UI
  - Cloudinary
 
+#### Smart contracts
+```
+frontend/src/blockchain/contracts/
+```
 
 ## 🎬 Getting Started
 
@@ -30,6 +34,7 @@ npm i
 Create a dotenv using dummy .env provided
 node server.js
 ```
+
  
 ## 👫 Contributors 
 * [Parikshit Juneja](https://github.com/parikshit3000)
