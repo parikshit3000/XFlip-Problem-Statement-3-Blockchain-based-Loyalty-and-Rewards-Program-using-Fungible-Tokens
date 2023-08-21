@@ -16,7 +16,7 @@
  - Material UI
  - Cloudinary
 
-#### Smart contracts
+## Smart contracts
 ```
 frontend/src/blockchain/contracts/
 ```
