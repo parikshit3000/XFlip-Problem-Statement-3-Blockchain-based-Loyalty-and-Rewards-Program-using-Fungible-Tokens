@@ -4,6 +4,8 @@ import { Address } from "../../blockchain/config";
 import { nftAddress } from "../../blockchain/config";
 import DynamicToken from "../../blockchain/artifacts/contracts/DynamicToken.sol/DynamicToken.json";
 import NFTEE from "../../blockchain/artifacts/contracts/NFTEE.sol/NFTEE.json";
+import { xflipAddress } from "../../blockchain/config";
+import XFlipToken from "../../blockchain/artifacts/contracts/XFlipToken.sol/XFlipToken.json";
 import Web3Modal from "web3modal";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,9 +46,11 @@ const Modal = ({ isOpen, onClose, image, name, offer, tag, coinz }) => {
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
     console.log(signer);
-    const contract = new ethers.Contract(nftAddress, NFTEE.abi, signer);
+    const contract = new ethers.Contract(xflipAddress, XFlipToken.abi, signer);
     console.log(contract);
-    let transaction = await contract.mint("1");
+    // get address of user from metamask
+    const address = await signer.getAddress();
+    let transaction = await contract.burn(address, Math.round(coinz));
     console.log(transaction);
 
     try {

@@ -24,10 +24,20 @@ import DealSlider from "../Home/DealSlider/DealSlider";
 import Product from "./Product";
 import img1 from "../../assets/images/Categories/beauty.png";
 import { BsArrowBarRight, BsArrowUpRightSquare } from "react-icons/bs";
+import { loadUser } from "../../actions/userAction";
+
+import { useDispatch } from "react-redux";
+
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
+
+import { xflipAddress } from "../../blockchain/config";
+import XFlipToken from "../../blockchain/artifacts/contracts/XFlipToken.sol/XFlipToken.json";
 
 const SuperCoins = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state) => state.cart);
   const { saveForLaterItems } = useSelector((state) => state.saveForLater);
@@ -57,11 +67,30 @@ const SuperCoins = () => {
   const handleShare = async () => {
     try {
       var refercoins = Math.floor(5 / 0.85);
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      console.log(signer);
+      const contract = new ethers.Contract(
+        xflipAddress,
+        XFlipToken.abi,
+        signer
+      );
+      console.log(contract);
+      // get address of user from metamask
+      const address = await signer.getAddress();
+      let transaction = await contract.mint(address, Math.round(refercoins));
+      console.log(transaction);
       const response = await updateCoins(userInfo?.user?._id, refercoins);
+      // update user state
+
       if (response.success) {
         enqueueSnackbar(`Thanks for sharing! You earned ${refercoins} coins!`, {
           variant: "success",
         });
+        await dispatch(loadUser());
+        navigate("/supercoins");
       } else {
         enqueueSnackbar("Something went wrong! Please try again.", {
           variant: "error",
@@ -163,45 +192,45 @@ const SuperCoins = () => {
 
           {/* <PriceSidebar cartItems={cartItems} /> */}
         </div>
-          <div className="flex flex-row m-auto mx-16 mt-5 shadow bg-white items-center">
-            <span className="font-medium text-lg px-2 sm:px-8 py-4 border-b">
-              Share and earn 5 Rup worth XFlips
-            </span>
-            <div className="share-buttons flex space-x-4">
-              <div className="p-2 bg-primary-blue rounded-full shadow-md hover:shadow-lg transition-shadow">
-                <FacebookShareButton
-                  url={shareUrl}
-                  quote={title}
-                  onClick={handleShare}
-                  className="cursor-pointer"
-                >
-                  <FacebookIcon size={20} round />
-                </FacebookShareButton>
-              </div>
+        <div className="flex flex-row m-auto mx-16 mt-5 shadow bg-white items-center">
+          <span className="font-medium text-lg px-2 sm:px-8 py-4 border-b">
+            Share and earn 5 Rup worth XFlips
+          </span>
+          <div className="share-buttons flex space-x-4">
+            <div className="p-2 bg-primary-blue rounded-full shadow-md hover:shadow-lg transition-shadow">
+              <FacebookShareButton
+                url={shareUrl}
+                quote={title}
+                onClick={handleShare}
+                className="cursor-pointer"
+              >
+                <FacebookIcon size={20} round />
+              </FacebookShareButton>
+            </div>
 
-              <div className="p-2 bg-primary-blue rounded-full shadow-md hover:shadow-lg transition-shadow">
-                <TwitterShareButton
-                  url={shareUrl}
-                  title={title}
-                  onClick={handleShare}
-                  className="cursor-pointer"
-                >
-                  <TwitterIcon size={20} round />
-                </TwitterShareButton>
-              </div>
+            <div className="p-2 bg-primary-blue rounded-full shadow-md hover:shadow-lg transition-shadow">
+              <TwitterShareButton
+                url={shareUrl}
+                title={title}
+                onClick={handleShare}
+                className="cursor-pointer"
+              >
+                <TwitterIcon size={20} round />
+              </TwitterShareButton>
+            </div>
 
-              <div className="p-2 bg-primary-blue rounded-full shadow-md hover:shadow-lg transition-shadow">
-                <WhatsappShareButton
-                  url={shareUrl}
-                  title={title}
-                  onClick={handleShare}
-                  className="cursor-pointer"
-                >
-                  <WhatsappIcon size={20} round />
-                </WhatsappShareButton>
-              </div>
+            <div className="p-2 bg-primary-blue rounded-full shadow-md hover:shadow-lg transition-shadow">
+              <WhatsappShareButton
+                url={shareUrl}
+                title={title}
+                onClick={handleShare}
+                className="cursor-pointer"
+              >
+                <WhatsappIcon size={20} round />
+              </WhatsappShareButton>
             </div>
           </div>
+        </div>
         {/* <!-- row --> */}
       </main>
     </>

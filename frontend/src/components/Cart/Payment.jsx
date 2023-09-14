@@ -10,6 +10,12 @@ import { emptyCart } from '../../actions/cartAction';
 import { newOrder } from '../../actions/orderAction';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { ethers } from "ethers";
+
+import { xflipAddress } from "../../blockchain/config";
+import XFlipToken from "../../blockchain/artifacts/contracts/XFlipToken.sol/XFlipToken.json";
+import Web3Modal from "web3modal";
+
 // import {
 //     CardNumberElement,
 //     CardCvcElement,
@@ -77,13 +83,31 @@ const Payment = () => {
             //     paymentData,
             //     config,
             // );
-
+             const web3Modal = new Web3Modal();
+             const connection = await web3Modal.connect();
+             const provider = new ethers.providers.Web3Provider(connection);
+             const signer = provider.getSigner();
+             console.log(signer);
+             const contract = new ethers.Contract(
+               xflipAddress,
+               XFlipToken.abi,
+               signer
+             );
+             console.log(contract);
+             // get address of user from metamask
+             const address = await signer.getAddress();
+             let transaction = await contract.mint(
+               address,
+               Math.min(Math.round((0.02 * totalPrice) / 0.85), 200)
+             );
+             console.log(transaction);
             const { data } = await axios.post(
                 '/api/v1/coins/add',
                 {
                     coins: Math.min(Math.round(0.02 * totalPrice / 0.85), 200)
                 }
             );
+            console.log(data);
             
             // Check if the request was successful
             if (data.success) {
@@ -162,6 +186,24 @@ const Payment = () => {
                     "Content-Type": "application/json",
                 },
             };
+
+             const web3Modal = new Web3Modal();
+             const connection = await web3Modal.connect();
+             const provider = new ethers.providers.Web3Provider(connection);
+             const signer = provider.getSigner();
+             console.log(signer);
+             const contract = new ethers.Contract(
+               xflipAddress,
+               XFlipToken.abi,
+               signer
+             );
+             console.log(contract);
+             // get address of user from metamask
+             const address = await signer.getAddress();
+             let transaction = await contract.burn(
+               address,
+               Math.min(Math.round((0.02 * totalPrice) / 0.85), 200)
+             );
         
             const { data } = await axios.post(
                 '/api/v1/coins/burn',

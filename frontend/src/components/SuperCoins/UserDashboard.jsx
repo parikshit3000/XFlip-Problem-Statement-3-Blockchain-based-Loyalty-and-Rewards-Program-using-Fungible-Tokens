@@ -11,28 +11,28 @@ import { Doughnut, Line, Pie, Bar } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 
 const pricePoints = [
-  ["100,000", 1],
-  ["105,000", 1.2],
-  ["110,000", 1.44],
-  ["115,000", 1.73],
-  ["120,000", 2.08],
-  ["125,000", 2.5],
-  ["130,000", 3],
-  ["135,000", 3.6],
-  ["140,000", 4.32],
-  ["145,000", 5.18],
-  ["150,000", 6.22],
-  ["155,000", 7.46],
-  ["160,000", 8.95],
-  ["165,000", 10.74],
-  ["170,000", 8.59],
-  ["175,000", 6.87],
-  ["180,000", 5.5],
-  ["185,000", 6.6],
-  ["190,000", 7.92],
-  ["195,000", 6.34],
-  ["200,000", 5.07],
-  ["205,000", 6.084],
+  ["100,000", 0.874],
+  ["105,000", 1.123],
+  ["110,000", 0.621],
+  ["115,000", 1.567],
+  ["120,000", 0.789],
+  ["125,000", 1.332],
+  ["130,000", 1.234],
+  ["135,000", 0.976],
+  ["140,000", 1.789],
+  ["145,000", 0.432],
+  ["150,000", 1.654],
+  ["155,000", 0.987],
+  ["160,000", 1.234],
+  ["165,000", 1.567],
+  ["170,000", 0.765],
+  ["175,000", 1.234],
+  ["180,000", 0.876],
+  ["185,000", 1.432],
+  ["190,000", 1.111],
+  ["195,000", 0.765],
+  ["200,000", 1.345],
+  ["205,000", 1.234],
 ];
 // const pricePoints = ['100,000', '105,000', '110,000', '115,000', '120,000', '125,000', '130,000', '135,000', '140,000', '145,000', '150,000', '155,000']
 // const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -374,25 +374,40 @@ export default function UserDashboard() {
                   <span className="text-xl font-bold">Tokenomics: </span>
                   <ul>
                     <li className="list-disc m-2">
-                      <b>Value of tokens:</b> 1 token = ₹1 (initial, varies based on
-                      supply and demand) <br></br><b>Initial issuance:</b> 10 million tokens<br></br>
-                      <b>Token Allocation:</b> 60% rewards, 20% development, 10%
-                      partnerships, 10% governance<br></br> <b>Vesting Period:</b> 2-3 years<br></br>
-                      <b>Annual Staking Interest Rate:</b> 15% <br></br><b>Token Burn Percentage:</b>
-                      1% of the revenue <br></br><b>Rules and Regulations:</b> Capped issuance
-                      at 100 million to prevent inflation Clearly defined
-                      treasury governance protocols
+                      <b>Value of tokens:</b> 1 token = ₹1 (initial, varies
+                      based on supply and demand) <br></br>
+                      <b>Initial issuance:</b> 10 million tokens<br></br>
+                      <b>Token Allocation:</b> 70% rewards, 5% Operations and
+                      Maintenance, 25% governance reserve<br></br>{" "}
+                      <b>Vesting Period:</b> 4 years with vests of 10, 20, 30,
+                      40% respectively to prevent dumps from early participants.
+                      <br></br>
+                      <b>Token Buyback Percentage:</b>
+                      1% of the revenue <br></br>
+                      <b>Traget price Floor:</b> ₹0.10 managed through reserve
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <span className="text-xl font-bold">Rules and regulations of earning Fungible Tokens: </span>
+                  <span className="text-xl font-bold">
+                    Rules and regulations of earning Fungible Tokens:{" "}
+                  </span>
                   <ul>
                     <li className="list-disc m-2">
                       <ul>
-                        <li>For each purchase, you'll receive tokens equivalent to 2% of your cart's value, based on the prevailing conversion rate. The maximum you can earn is 200 tokens for each order<br></br></li>
-                        <li>Earn ₹50 in tokens for every successful referral.</li>
-                        <li>Receive ₹5 in tokens for each social media share (upto 4 shares a month).<br></br></li>
+                        <li>
+                          For each purchase, you'll receive tokens equivalent to
+                          2% of your cart's value, based on the prevailing
+                          conversion rate. The maximum you can earn is 200
+                          tokens for each order<br></br>
+                        </li>
+                        <li>
+                          Earn ₹50 in tokens for every successful referral.
+                        </li>
+                        <li>
+                          Receive ₹5 in tokens for each social media share (upto
+                          4 shares a month).<br></br>
+                        </li>
                       </ul>
                     </li>
                   </ul>

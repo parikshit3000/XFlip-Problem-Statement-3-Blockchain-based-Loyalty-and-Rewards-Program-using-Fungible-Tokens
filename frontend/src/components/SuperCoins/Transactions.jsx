@@ -70,9 +70,10 @@ const Transactions = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=0x703CDbd5975Bdc5580f6D898A69e9b93Eb6739DB&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=7PR586J85ZAYCK5R8W4MI3MZJCD2FTVW8S"
+        "https://api-testnet.polygonscan.com/api?module=account&action=txlist&address=0xE084e0b47007812cdFEc142783f530cd5A8484a2&startblock=0&endblock=99999999&page=2&offset=10&sort=asc&apikey=7PR586J85ZAYCK5R8W4MI3MZJCD2FTVW8S"
       )
       .then((res) => {
+        console.log(res);
         console.log(res.data.result);
         // reverse the array
         res.data.result.reverse();
@@ -180,7 +181,7 @@ const Transactions = () => {
               </div> */}
 
               {transactions.length > 0 ? (
-                <table className="table-fixed w-full mt-4 mb-2 ">
+                <table className="table-fixed w-full mt-4 mb-2 overflow-scroll overflow-y-auto ">
                   <thead>
                     <tr className="text-white bg-primary-blue rounded-md">
                       <th className="text-left px-4 py-2 border-b border-slate-400">
@@ -206,7 +207,7 @@ const Transactions = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="overflow-scroll overflow-y-auto">
                     {transactions.map((transaction) => (
                       <tr
                         key={transaction}
@@ -217,7 +218,9 @@ const Transactions = () => {
                         </td>
                         <td className="border-b border-slate-400 px-4 py-2">
                           <p className="bg-yellow-100 text-black w-fit py-1 rounded-md px-4 ">
-                            {tx[Math.floor(Math.random() * tx.length)].note}
+
+                            {transaction.functionName.substring( 0, transaction.functionName.indexOf('(') )}
+
                           </p>
                         </td>
                         <td className="border-b border-slate-400 py-2 px-2 text-center">
@@ -254,8 +257,9 @@ const Transactions = () => {
             {/* <!-- saved for later items container --> */}
             <div className="flex flex-col mt-5 shadow bg-white">
               <Link
-                to="https://mumbai.polygonscan.com/address/0x703CDbd5975Bdc5580f6D898A69e9b93Eb6739DB"
+                to="https://mumbai.polygonscan.com/address/0xE084e0b47007812cdFEc142783f530cd5A8484a2"
                 className=" underline font-medium text-lg px-2 sm:px-8 py-4 border-b"
+                target="_blank"
               >
                 Get a more detialed view on etherscan
               </Link>

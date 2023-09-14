@@ -31,7 +31,7 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, user }) => {
 
   const navs = [
     {
-      title: "Supercoin Zone",
+      title: "XFlip Zone",
       icon: <OfflineBoltIcon sx={{ fontSize: "18px" }} />,
       redirect: "/supercoins",
     },

@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "@arcana/auth": "^1.0.7",
+    "@arcana/auth-react": "^0.0.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.0",

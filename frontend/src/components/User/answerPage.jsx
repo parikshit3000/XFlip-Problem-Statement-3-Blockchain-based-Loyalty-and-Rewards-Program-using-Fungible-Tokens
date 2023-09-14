@@ -9,6 +9,8 @@ import NFTEE from "../../blockchain/artifacts/contracts/NFTEE.sol/NFTEE.json";
 import Web3Modal from "web3modal";
 import { useSnackbar } from "notistack";
 
+import { xflipAddress } from "../../blockchain/config";
+import XFlipToken from "../../blockchain/artifacts/contracts/XFlipToken.sol/XFlipToken.json";
 
 const AnswerPage = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -81,20 +83,17 @@ const AnswerPage = () => {
   };
 
   const sign = async () => {
-    console.log("signing");
-    // const provider = new ethers.BrowserProvider(window.ethereum);
-    // console.log(provider);
-    // sign the message
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    console.log(signer);
-    const contract = new ethers.Contract(nftAddress, NFTEE.abi, signer);
-    console.log(contract);
-    let transaction = await contract.mint("1");
-    console.log(transaction);
-    // enqueueSnackbar(`${name} Tokens deducted`, { variant: "success" });
+   const web3Modal = new Web3Modal();
+   const connection = await web3Modal.connect();
+   const provider = new ethers.providers.Web3Provider(connection);
+   const signer = provider.getSigner();
+   console.log(signer);
+   const contract = new ethers.Contract(xflipAddress, XFlipToken.abi, signer);
+   console.log(contract);
+   // get address of user from metamask
+   const address = await signer.getAddress();
+   let transaction = await contract.burn(address, Math.round(2));
+   console.log(transaction);
   };
 
   return (

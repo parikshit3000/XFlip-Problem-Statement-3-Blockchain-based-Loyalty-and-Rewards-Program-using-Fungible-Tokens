@@ -1,2 +1,3 @@
-export const Address = "0xC8ea306532ccd7f46A3fB093c7D901E950694397";
-export const nftAddress = "0x703CDbd5975Bdc5580f6D898A69e9b93Eb6739DB";
+export const Address = "0x8Fe368d96EC60D6e47bcA40CF8515313342349E2";
+export const nftAddress = "0x66918125973e68609ef8AB9F940Fb04E9459b232";
+export const xflipAddress = "0xE084e0b47007812cdFEc142783f530cd5A8484a2";

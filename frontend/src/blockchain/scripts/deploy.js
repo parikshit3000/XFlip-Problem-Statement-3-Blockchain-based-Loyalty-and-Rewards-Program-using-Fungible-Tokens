@@ -10,16 +10,20 @@ async function main() {
   const nftee = await NFTEE.deploy();
   await nftee.deployed();
 
+  const XFlip = await hre.ethers.getContractFactory("XFlipToken");
+  const cap = ethers.utils.parseEther("1000000000");
+  const xflip = await XFlip.deploy(cap)
+  await xflip.deployed();
+
   console.log("NFTEE deployed to:", nftee.address);
 
   console.log("DynamicToken deployed to:", dyn.address);
-  console.log(
-    `If it is in mumbai: https://mumbai.polygonscan.com/address/${dyn.address}`
-  );
+
+  console.log("XFlip deployed to:", xflip.address);
 
   fs.writeFileSync(
     "./config.js",
-    `export const Address = "${dyn.address}";\nexport const nftAddress = "${nftee.address}";`
+    `export const Address = "${dyn.address}";\nexport const nftAddress = "${nftee.address}";\nexport const xflipAddress = "${xflip.address}";`
      
   );
 }

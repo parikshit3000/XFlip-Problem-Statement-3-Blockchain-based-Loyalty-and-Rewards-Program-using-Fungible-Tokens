@@ -34,30 +34,32 @@ const MainData = () => {
     0
   );
 
-  const pricePoints = [
-    ["100,000", 1],
-    ["105,000", 1.2],
-    ["110,000", 1.44],
-    ["115,000", 1.73],
-    ["120,000", 2.08],
-    ["125,000", 2.5],
-    ["130,000", 3],
-    ["135,000", 3.6],
-    ["140,000", 4.32],
-    ["145,000", 5.18],
-    ["150,000", 6.22],
-    ["155,000", 7.46],
-    ["160,000", 8.95],
-    ["165,000", 10.74],
-    ["170,000", 8.59],
-    ["175,000", 6.87],
-    ["180,000", 5.5],
-    ["185,000", 6.6],
-    ["190,000", 7.92],
-    ["195,000", 6.34],
-    ["200,000", 5.07],
-    ["205,000", 6.084],
-  ];
+const pricePoints = [
+  ["100,000", 0.874],
+  ["105,000", 1.123],
+  ["110,000", 0.621],
+  ["115,000", 1.567],
+  ["120,000", 0.789],
+  ["125,000", 1.332],
+  ["130,000", 1.234],
+  ["135,000", 0.976],
+  ["140,000", 1.789],
+  ["145,000", 0.432],
+  ["150,000", 1.654],
+  ["155,000", 0.987],
+  ["160,000", 1.234],
+  ["165,000", 1.567],
+  ["170,000", 0.765],
+  ["175,000", 1.234],
+  ["180,000", 0.876],
+  ["185,000", 1.432],
+  ["190,000", 1.111],
+  ["195,000", 0.765],
+  ["200,000", 1.345],
+  ["205,000", 1.234],
+];
+
+
 
   const lineState = {
     labels: pricePoints.map((point) => point[0]),
@@ -82,15 +84,15 @@ const MainData = () => {
         </div>
         <div className="flex flex-col bg-red-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
           <h4 className="text-gray-100 font-medium">Current Token Holders</h4>
-          <h2 className="text-2xl font-bold">1000</h2>
+          <h2 className="text-2xl font-bold">1047</h2>
         </div>
         <div className="flex flex-col bg-yellow-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
           <h4 className="text-gray-100 font-medium">Treasury Tokens</h4>
-          <h2 className="text-2xl font-bold">20,000</h2>
+          <h2 className="text-2xl font-bold">25,000</h2>
         </div>
         <div className="flex flex-col bg-green-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
           <h4 className="text-gray-100 font-medium">Total Tokens Redeemed</h4>
-          <h2 className="text-2xl font-bold">5000</h2>
+          <h2 className="text-2xl font-bold">3394</h2>
         </div>
       </div>
 
